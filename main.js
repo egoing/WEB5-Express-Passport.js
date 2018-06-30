@@ -1,3 +1,11 @@
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => res.send('Hello World!'))
+
+app.listen(3000, () => console.log('Example app listening on port 3000!'))
+
+/*
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
@@ -19,7 +27,7 @@ var app = http.createServer(function(request,response){
           var html = template.HTML(title, list,
             `<h2>${title}</h2>${description}`,
             `<a href="/create">create</a>`
-          );
+          ); 
           response.writeHead(200);
           response.end(html);
         });
@@ -141,3 +149,4 @@ var app = http.createServer(function(request,response){
     }
 });
 app.listen(3000);
+*/
