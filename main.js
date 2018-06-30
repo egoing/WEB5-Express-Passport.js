@@ -18,8 +18,8 @@ app.get('/', function(request, response) {
   });
 });
 
-app.get('/page', function(req, res) { 
-  return res.send('/page');
+app.get('/page/:pageId', function(request, response) { 
+  response.send(request.params);
 });
 
 app.listen(3000, function() {
