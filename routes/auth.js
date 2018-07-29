@@ -5,7 +5,13 @@ var fs = require('fs');
 var sanitizeHtml = require('sanitize-html');
 var template = require('../lib/template.js');
 
-router.get('/login', function(request, response){
+var authData = {
+  email: 'egoing777@gmail.com',
+  password: '111111',
+  nickname: 'egoing'
+}
+
+router.get('/login', function (request, response) {
   var title = 'WEB - login';
   var list = template.list(request.list);
   var html = template.HTML(title, list, `
@@ -18,6 +24,18 @@ router.get('/login', function(request, response){
     </form>
   `, '');
   response.send(html);
+});
+
+router.post('/login_process', function (request, response) {
+  var post = request.body;
+  var email = post.email;
+  var password = post.pwd;
+  if(email === authData.email && password === authData.password){
+    response.send('Welcome!');
+  } else {
+    response.send('Who?');
+  }
+  // response.redirect(`/topic/${title}`);
 });
 
 /*
@@ -119,4 +137,4 @@ router.get('/create', function(request, response){
   });
   */
 
-  module.exports = router;
+module.exports = router;
