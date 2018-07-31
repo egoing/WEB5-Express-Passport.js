@@ -22,18 +22,6 @@ app.use(session({
   store: new FileStore()
 }))
 app.use(flash());
-app.get('/flash', function(req, res){
-  // Set a flash message by passing the key, followed by the value, to req.flash().
-  req.flash('msg', 'Flash is back!!');
-  res.send('flash');
-});
-
-app.get('/flash-display', function(req, res){
-  // Get an array of flash messages by passing the key to req.flash()
-  var fmsg =  req.flash();
-  console.log(fmsg);
-  res.send(fmsg);
-});
 
 var authData = {
   email: 'egoing777@gmail.com',
@@ -68,7 +56,9 @@ passport.use(new LocalStrategy(
       console.log(1);
       if(password === authData.password){
         console.log(2);
-        return done(null, authData);
+        return done(null, authData, {
+          message: 'Welcome.'
+        });
       } else {
         console.log(3);
         return done(null, false, {
@@ -87,7 +77,9 @@ passport.use(new LocalStrategy(
 app.post('/auth/login_process',
   passport.authenticate('local', {
     successRedirect: '/',
-    failureRedirect: '/auth/login'
+    failureRedirect: '/auth/login',
+    failureFlash:true,
+    successFlash:true
   }));
 
 
